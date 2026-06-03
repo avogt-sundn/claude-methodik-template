@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "mlx/mlx-community/Qwen3.6-27B-OptiQ-4bit",
+"model": "mlx/gemma-4-26b-a4b-it-mlx",
   "provider": {
     "lmstudio": {
       "npm": "@ai-sdk/openai-compatible",
@@ -20,13 +20,7 @@
       "options": {
         "baseURL": "${MLX_SERVER}/v1"
       },
-      "models": {
-        "mlx-community/Qwen3.6-27B-OptiQ-4bit": {
-          "name": "Qwen3.6 27B OptiQ 4bit"
-        },
-        "deepseek/deepseek-r1-0528-qwen3-8b": {
-            "name": "deepseek/deepseek-r1-0528-qwen3-8b"
-        },
+    "models": {
         "gemma-4-26b-a4b-it-mlx": {
             "name": "gemma-4-26b-a4b-it-mlx"
         }

@@ -1,16 +1,15 @@
 // For format details, see https://aka.ms/devcontainer.json.
 // {{SETUP}} Lies DOMAIN.md für Hinweise zu den Anpassungen, bevor du dieses File änderst.
 {
-  "name": "{{PROJECT_NAME}}",
+"$schema": "./devcontainer.schema.json",
+"name": "KI",
   "build": {
     "dockerfile": "Dockerfile"
   },
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers-community/npm-features/prettier:1": {},
-    "ghcr.io/devcontainers-extra/features/curl-apt-get:1": {},
     "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {},
-    "ghcr.io/devcontainers/features/common-utils:2.5.6": {},
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
     "ghcr.io/devcontainers-extra/features/ripgrep:1": {}
   },

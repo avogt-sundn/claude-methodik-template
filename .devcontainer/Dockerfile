@@ -2,11 +2,12 @@ FROM mcr.microsoft.com/devcontainers/java:dev-25-jdk-bookworm
 
 ENV IGNORE_NOTICE=true
 
-# System-Pakete + Playwright OS-Abhängigkeiten — single apt layer
+# Common utils + Playwright system dependencies — single apt layer
 RUN apt-get update && apt-get install -y --no-install-recommends \
     iputils-ping \
     dnsutils \
     file \
+    apache2-utils \
     python3-pip \
     httpie \
     telnet \
@@ -30,8 +31,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /home/vscode
 
-# AWS CLI — Installer-Artefakte nach Installation entfernen
-# Entfernen wenn kein AWS benötigt wird
+# AWS CLI — clean up installer artifacts after install
 RUN ARCH=$(uname -m) \
     && curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH}.zip" -o awscliv2.zip \
     && unzip awscliv2.zip \
@@ -43,23 +43,30 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-# Playwright Chromium — ins Image gebacken, damit postCreate keinen Download braucht
+# Playwright Chromium — baked into image so postCreate doesn't need to download it
 ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 RUN npx --yes playwright@1.58.2 install chromium && chmod -R 777 /ms-playwright
 
-# Python-Abhängigkeiten (pyyaml für Skript-Support)
+# Python deps
 RUN pip3 install --break-system-packages pyyaml
 
 # Claude Code CLI
 RUN npm install -g @anthropic-ai/claude-code
 
-# Spring Boot CLI (entfernen wenn kein Spring Boot)
+# GitHub Copilot CLI
+RUN npm install -g @github/copilot
+
+# OpenCode CLI — RUN executes as root so installer writes to /root/.opencode; copy to system bin
+RUN curl -fsSL https://opencode.ai/install | bash \
+    && install -m755 /root/.opencode/bin/opencode /usr/local/bin/opencode
+
+# Spring Boot CLI — uses base image JDK
 ARG SPRINGBOOT_CLI_VERSION=3.4.4
 RUN curl -fsSL "https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-cli/${SPRINGBOOT_CLI_VERSION}/spring-boot-cli-${SPRINGBOOT_CLI_VERSION}-bin.tar.gz" \
     | tar xz -C /opt \
     && ln -sf /opt/spring-${SPRINGBOOT_CLI_VERSION}/bin/spring /usr/local/bin/spring
 
-# Quarkus CLI (entfernen wenn kein Quarkus)
+# Quarkus CLI — uses base image JDK
 ARG QUARKUS_CLI_VERSION=3.19.4
 RUN curl -fsSL "https://github.com/quarkusio/quarkus/releases/download/${QUARKUS_CLI_VERSION}/quarkus-cli-${QUARKUS_CLI_VERSION}.tar.gz" \
     | tar xz -C /opt \
