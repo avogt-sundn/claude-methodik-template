@@ -1,0 +1,82 @@
+{
+  "_setup": [
+    "Ersetze alle {{PLACEHOLDER}}-Werte vor dem ersten Einsatz:",
+    "  {{PROJECT_ROOT}}  — absoluter Pfad zum Repo-Root (z. B. /workspaces/mein-projekt)",
+    "  {{NTFY_URL}}      — ntfy.sh-Topic-URL für Benachrichtigungen (oder Hook komplett entfernen)"
+  ],
+  "permissions": {
+    "defaultMode": "bypassPermissions"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash {{PROJECT_ROOT}}/.claude/statusline-command.sh"
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'input=$(cat); last_input=$(cat /tmp/claude-last-user-input.txt 2>/dev/null || echo 0); now=$(date +%s); elapsed=$((now - last_input)); [ \"$elapsed\" -lt 120 ] && exit 0; msg=$(jq -r \".message // \\\"Claude notification\\\"\" 2>/dev/null <<< \"$input\") || msg=\"Claude notification\"; latest=$(ls -t ~/.claude/projects/$(echo {{PROJECT_ROOT}} | tr / -)/*.jsonl 2>/dev/null | head -1); last_q=$(tail -500 \"$latest\" | jq -r \"select(.type==\\\"assistant\\\") | .message.content[]? | select(.type==\\\"text\\\") | .text\" 2>/dev/null | grep -E \"\\\\?\" | tail -1 | sed \"s/^ *//\"); [ -n \"$last_q\" ] && title=\"$last_q\" || title=$(printf \"%s\" \"$msg\" | cut -c1-60); branch=$(git -C {{PROJECT_ROOT}} rev-parse --abbrev-ref HEAD 2>/dev/null); commit=$(git -C {{PROJECT_ROOT}} log --oneline -1 2>/dev/null); session=$(jq -r \".session_id // \\\"\\\"\" 2>/dev/null <<< \"$input\" | cut -c1-8); ts=$(date +\"%H:%M\"); body=\"$msg\"; [ -n \"$branch\" ] && body=\"$body\\nbranch: $branch | $commit\"; [ -f /tmp/claude-current-file.txt ] && body=\"$body\\nfile: $(cat /tmp/claude-current-file.txt)\"; [ -n \"$session\" ] && body=\"$body\\nsession: $session | $ts\"; curl -s -X POST {{NTFY_URL}} -H \"Content-Type: text/plain\" -H \"Title: $title\" -d \"$(echo -e \"$body\")\"'",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "date +%s > /tmp/claude-last-user-input.txt",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Read|Glob|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r 'if .tool_name == \"Read\" then .tool_input.file_path elif .tool_name == \"Glob\" then .tool_input.pattern elif .tool_name == \"Grep\" then (.tool_input.path // \".\") else \"\" end' 2>/dev/null | { read -r f; [ -n \"$f\" ] && echo \"$f\" > /tmp/claude-current-file.txt; } || true",
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); sid=$(echo \"$input\" | jq -r '.session_id // empty'); f=$(echo \"$input\" | jq -r '.tool_input.file_path // empty'); [ -n \"$f\" ] && [ -n \"$sid\" ] && echo \"$f\" >> \"/tmp/claude-reads-$sid\" || true",
+            "async": true
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); sid=$(echo \"$input\" | jq -r '.session_id // empty'); f=$(echo \"$input\" | jq -r '.tool_input.file_path // empty'); [ -n \"$f\" ] && [ -n \"$sid\" ] && echo \"$f\" >> \"/tmp/claude-writes-$sid\" || true",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "input=$(cat); cmd=$(echo \"$input\" | jq -r '.tool_input.command // empty'); if echo \"$cmd\" | grep -qE '(^|[|&;[:space:]])git commit( |$)'; then echo \"{\\\"hookSpecificOutput\\\":{\\\"hookEventName\\\":\\\"PreToolUse\\\",\\\"permissionDecision\\\":\\\"deny\\\",\\\"permissionDecisionReason\\\":\\\"[GIT] Direct git commit is blocked. Use the git-commit-master agent: say 'commit these changes'.\\\"}}\" ; fi",
+            "statusMessage": "Checking git commit policy..."
+          }
+        ]
+      }
+    ]
+  }
+}
