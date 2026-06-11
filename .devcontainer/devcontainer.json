@@ -11,7 +11,10 @@
     "ghcr.io/devcontainers-community/npm-features/prettier:1": {},
     "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {},
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
-    "ghcr.io/devcontainers-extra/features/ripgrep:1": {}
+    "ghcr.io/devcontainers-extra/features/ripgrep:1": {},
+    // Local features — remove entries that do not apply to this repo
+    "./features/opencode": {},
+    "./features/vertex-auth": {}
   },
   // Ports nach Bedarf anpassen oder entfernen
   "forwardPorts": [

@@ -1,9 +1,16 @@
 #!/usr/bin/env bash
-
-scriptdir="$(dirname "$0")"
 set -e
 
-sh "$scriptdir/postCreate-Claude.sh"
-sh $scriptdir/postCreate-OpenCode.sh
+scriptdir="$(dirname "$0")"
+
+# Run postCreate.sh from each local feature — add a feature directory to enable it,
+# remove it (or omit it) to disable it. Order is lexicographic by feature name.
+for postcreate in "$scriptdir"/../features/*/postCreate.sh; do
+  if [ -f "$postcreate" ]; then
+    feature_name="$(basename "$(dirname "$postcreate")")"
+    echo "[postCreate] $feature_name"
+    sh "$postcreate"
+  fi
+done
 
 echo "Done devcontainering."
