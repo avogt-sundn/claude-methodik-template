@@ -1,3 +1,9 @@
 .history/
 .env
 .DS_Store
+
+# Lokale Secrets niemals versionieren
+settings/
+.secrets/
+*credentials.json
+*service-account*.json

@@ -1,6 +1,6 @@
 # claude-methodik-template
 
-Portables Starter-Kit für die KI-gestützte Arbeitsweise mit Claude Code.  
+Portables Starter-Kit für die KI-gestützte Arbeitsweise mit Claude Code.
 Enthält 15 Axiome, 6 spezialisierte Agenten, Lifecycle-Hooks, SVG-Styleguide und Domänen-Workflows.
 
 ---
@@ -26,6 +26,29 @@ initialize this project
 ```
 
 Der `projekt-init`-Agent stellt alle nötigen Fragen, ersetzt die Platzhalter, legt die Verzeichnisse an und löst den ersten Commit aus. Fertig.
+
+### 3. Claude CLI mit Vertex AI (Variante B: `localEnv`)
+
+Dieses Template nutzt einen Host-Mount fuer die Service-Account-Datei (nicht im Repository).
+
+1. Lege die Credentials auf dem Host ab:
+
+```bash
+mkdir -p ~/.config/gcp
+cp /pfad/zu/deiner/credentials.json ~/.config/gcp/vertex-service-account.json
+chmod 600 ~/.config/gcp/vertex-service-account.json
+```
+
+2. Setze auf dem Host die benoetigten Variablen (z. B. in `~/.zshrc`):
+
+```bash
+export GCP_PROJECT_ID="dein-gcp-projekt"
+export GCP_REGION="europe-west1"
+```
+
+3. Devcontainer neu oeffnen/rebuilden.
+
+Beim `postCreate` wird automatisch geprueft, ob die JSON-Datei vorhanden ist und die erwarteten Felder enthaelt.
 
 ---
 
