@@ -23,6 +23,15 @@
     "models": {
         "gemma-4-26b-a4b-it-mlx": {
             "name": "gemma-4-26b-a4b-it-mlx"
+        },
+        "qwen3.6-27b-mlx": {
+            "name": "qwen3.6-27b-mlx"
+        },
+        "google/gemma-4-26b-a4b-qat": {
+            "name": "google/gemma-4-26b-a4b-qat"
+        },
+        "google/gemma-4-e4b": {
+            "name": "google/gemma-4-e4b"
         }
       }
     }
