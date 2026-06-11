@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"
+     font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arrow-primary" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#007a99"/>
+    </marker>
+    <marker id="arrow-neutral" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#555"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#c0392b"/>
+    </marker>
+    <style>
+      .title        { font-size: 24px; font-weight: bold;   fill: #ffffff; }
+      .subtitle     { font-size: 14px;                      fill: #e0f4f8; }
+      .section-title{ font-size: 16px; font-weight: bold;   fill: #ffffff; }
+      .label        { font-size:  9px;                      fill: #666;    }
+      .body         { font-size: 12px;                      fill: #444;    }
+      .code         { font-size: 11px; font-family: 'Cascadia Code','Courier New',monospace; fill: #1a1a2e; }
+      .badge        { font-size:  9px; font-weight: bold;   fill: #ffffff; }
+      .hint         { font-size:  9px;                      fill: #888;    }
+    </style>
+  </defs>
+
+  <!-- Globaler Hintergrund -->
+  <rect width="800" height="600" fill="#f4f8fb"/>
+
+  <!-- Header -->
+  <rect width="800" height="50" fill="#005f73"/>
+  <text x="20" y="32" class="title">Claude Methodik Cheat Sheet</text>
+  <text x="20" y="45" class="subtitle">Strukturierte KI-gestützte Arbeitsweise</text>
+
+  <!-- SECTION 1: Wissenskarte (Top Left) -->
+  <rect x="20" y="70" width="360" height="230" rx="8" fill="#ffffff" stroke="#ddd" stroke-width="1.5"/>
+  <rect x="20" y="70" width="360" height="30" rx="8" fill="#007a99"/>
+  <text x="35" y="90" class="section-title">Wissenskarte (Hierarchy)</text>
+  
+  <!-- Box 1 -->
+  <rect x="130" y="115" width="160" height="30" rx="6" fill="#e0f4f8" stroke="#007a99" stroke-width="1"/>
+  <text x="210" y="135" class="body" text-anchor="middle">CLAUDE.md</text>
+  <!-- Arrow 1-2 -->
+  <line x1="210" y1="145" x2="210" y2="179" stroke="#007a99" stroke-width="1.5" marker-end="url(#arrow-primary)"/>
+  
+  <!-- Box 2 -->
+  <rect x="130" y="180" width="160" height="30" rx="6" fill="#e0f4f8" stroke="#007a99" stroke-width="1"/>
+  <text x="210" y="200" class="body" text-anchor="middle">Agenten-Specs</text>
+  <!-- Arrow 2-3 -->
+  <line x1="210" y1="210" x2="210" y2="244" stroke="#007a99" stroke-width="1.5" marker-end="url(#arrow-primary)"/>
+  
+  <!-- Box 3 -->
+  <rect x="130" y="245" width="160" height="30" rx="6" fill="#e0f4f8" stroke="#007a99" stroke-width="1"/>
+  <text x="210" y="265" class="body" text-anchor="middle">DOMAIN.md</text>
+
+  <!-- SECTION 2: Agenten (Top Right) -->
+  <rect x="410" y="70" width="370" height="210" rx="8" fill="#ffffff" stroke="#ddd" stroke-width="1.5"/>
+  <rect x="410" y="70" width="370" height="30" rx="8" fill="#007a99"/>
+  <text x="425" y="90" class="section-title">Spezialisierte Agenten</text>
+
+  <g transform="translate(430, 115)">
+    <rect width="110" height="30" rx="6" fill="#f0fff4" stroke="#27ae60" stroke-width="1"/>
+    <text x="55" y="20" class="body" text-anchor="middle">git-commit-master</text>
+    
+    <rect y="40" width="110" height="30" rx="6" fill="#f0fff4" stroke="#27ae60" stroke-width="1"/>
+    <text x="55" y="60" class="body" text-anchor="middle">session-observer</text>
+    
+    <rect y="80" width="110" height="30" rx="6" fill="#f0fff4" stroke="#27ae60" stroke-width="1"/>
+    <text x="55" y="100" class="body" text-anchor="middle">methodology-advisor</text>
+    
+    <rect y="120" width="110" height="30" rx="6" fill="#f0fff4" stroke="#27ae60" stroke-width="1"/>
+    <text x="55" y="140" class="body" text-anchor="middle">docs-export</text>
+  </g>
+  <g transform="translate(560, 115)">
+    <rect width="110" height="30" rx="6" fill="#f0fff4" stroke="#27ae60" stroke-width="1"/>
+    <text x="55" y="20" class="body" text-anchor="middle">projekt-init</text>
+    
+    <rect y="40" width="110" height="30" rx="6" fill="#f0fff4" stroke="#27ae60" stroke-width="1"/>
+    <text x="55" y="60" class="body" text-anchor="middle">quelldokumente-eingang</text>
+  </g>
+
+  <!-- SECTION 3: Axiome (Bottom Left) -->
+  <rect x="20" y="310" width="360" height="270" rx="8" fill="#ffffff" stroke="#ddd" stroke-width="1.5"/>
+  <rect x="20" y="310" width="360" height="30" rx="8" fill="#e07b00"/>
+  <text x="35" y="330" class="section-title">Axiome (Highlights)</text>
+  
+  <text x="35" y="365" class="body">• CLAUDE-3: Lesen vor Schreiben</text>
+  <text x="35" y="390" class="body">• CLAUDE-4: Ergebnisse verifizieren</text>
+  <text x="35" y="415" class="body">• CLAUDE-5: Minimaler Fußabdruck</text>
+  <text x="35" y="440" class="body">• CLAUDE-10: Ubiquitäre Sprache</text>
+  <text x="35" y="465" class="body">• CLAUDE-15: SVG-only Diagrams</text>
+  <text x="35" y="490" class="body">• CLAUDE-13: Wissenskarte traversieren</text>
+
+  <!-- SECTION 4: Workflows (Bottom Right) -->
+  <rect x="410" y="310" width="370" height="270" rx="8" fill="#ffffff" stroke="#ddd" stroke-width="1.5"/>
+  <rect x="410" y="310" width="370" height="30" rx="8" fill="#27ae60"/>
+  <text x="425" y="330" class="section-title">Workflows &amp; Prozesse</text>
+
+  <rect x="425" y="345" width="340" height="45" rx="6" fill="#fff8ee" stroke="#e07b00" stroke-width="1"/>
+  <text x="435" y="368" class="body" font-weight="bold">Tickets: 3-stufiges Verfahren</text>
+  <text x="435" y="386" class="hint">eingang $\to$ review $\to$ arbeitsstand</text>
+
+  <rect x="425" y="405" width="340" height="45" rx="6" fill="#f0fff4" stroke="#27ae60" stroke-width="1"/>
+  <text x="435" y="428" class="body" font-weight="bold">Erkundungen: Strukturierte Recherche</text>
+
+  <rect x="425" y="465" width="340" height="45" rx="6" fill="#f0fff4" stroke="#27ae60" stroke-width="1"/>
+  <text x="435" y="488" class="body" font-weight="bold">Domänen: Unabhängige Kapselung</text>
+  <text x="435" y="506" class="hint">jeder Ordner hat eine DOMAIN.md</text>
+
+  <rect x="425" y="525" width="340" height="45" rx="6" fill="#fff8ee" stroke="#e07b00" stroke-width="1"/>
+  <text x="435" y="548" class="body" font-weight="bold">Git: Nur via git-commit-master</text>
+</svg>

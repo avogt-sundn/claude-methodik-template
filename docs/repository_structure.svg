@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif">
+  <defs>
+    <marker id="arrow-primary" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#007a99"/>
+    </marker>
+    <marker id="arrow-neutral" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#555"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#c0392b"/>
+    </marker>
+    <style>
+      .title        { font-size: 22px; font-weight: bold;   fill: #ffffff; }
+      .subtitle     { font-size: 14px;                      fill: #e0f4f8; }
+      .section-title{ font-size: 16px; font-weight: bold;   fill: #007a99; }
+      .label        { font-size:  10px;                      fill: #666;    }
+      .body         { font-size: 13px;                      fill: #444;    }
+      .code         { font-size: 11px; font-family: 'Cascadia Code','Courier New',monospace; fill: #1a1a2e; }
+      .badge        { font-size:  10px; font-weight: bold;   fill: #ffffff; }
+      .hint         { font-size:  10px;                      fill: #888;    }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="600" fill="#f4f8fb"/>
+
+  <!-- Header -->
+  <rect width="1000" height="50" fill="#005f73"/>
+  <text x="20" y="32" class="title" fill="#ffffff">Repository Architecture: Claude Methodology Kit</text>
+
+  <!-- 1. Core & Documentation -->
+  <rect x="30" y="80" width="280" height="250" rx="8" fill="#ffffff" stroke="#ddd" stroke-width="1.5"/>
+  <rect x="30" y="80" width="280" height="30" rx="8" fill="#e0f4f8" opacity="0.5"/>
+  <text x="45" y="105" class="section-title">Core &amp; Documentation</text>
+  
+  <text x="45" y="145" class="code">CLAUDE.md</text>
+  <text x="45" y="165" class="body">Axioms &amp; Governance</text>
+  
+  <line x1="45" y1="180" x2="275" y2="180" stroke="#ddd" stroke-width="1"/>
+  
+  <text x="45" y="205" class="code">README.md</text>
+  <text x="45" y="225" class="body">Project Overview</text>
+
+  <text x="45" y="260" class="code">docs/</text>
+  <text x="45" y="280" class="body">General Documentation</text>
+
+  <text x="45" y="305" class="code">quelldokumente/</text>
+  <text x="45" y="325" class="body">Reference Material</text>
+
+  <!-- 2. Infrastructure -->
+  <rect x="330" y="80" width="280" height="110" rx="8" fill="#ffffff" stroke="#ddd" stroke-width="1.5"/>
+  <rect x="330" y="80" width="280" height="30" rx="8" fill="#e0f4f8" opacity="0.5"/>
+  <text x="345" y="105" class="section-title">Infrastructure</text>
+  
+  <text x="345" y="145" class="code">.devcontainer/</text>
+  <text x="345" y="165" class="body">Dev Environment</text>
+  
+  <text x="345" y="185" class="code">Dockerfile</text>
+
+  <!-- 3. Agent Framework -->
+  <rect x="640" y="80" width="330" height="250" rx="8" fill="#ffffff" stroke="#ddd" stroke-width="1.5"/>
+  <rect x="640" y="80" width="330" height="30" rx="8" fill="#e0f4f8" opacity="0.5"/>
+  <text x="655" y="105" class="section-title">Agent Framework</text>
+  
+  <text x="655" y="145" class="code">.claude/</text>
+  <text x="655" y="165" class="body">Orchestration &amp; Tools</text>
+
+  <line x1="655" y1="180" x2="945" y2="180" stroke="#ddd" stroke-width="1"/>
+
+  <text x="655" y="205" class="code">.claude/agents/</text>
+  <text x="655" y="225" class="body">Task-specific Agents</text>
+
+  <text x="655" y="250" class="code">.claude/grafiken/</text>
+  <text x="655" y="270" class="body">Visual Assets (SVG)</text>
+
+  <text x="655" y="295" class="code">settings.json</text>
+
+  <!-- 4. Workflows -->
+  <rect x="330" y="210" width="610" height="360" rx="8" fill="#ffffff" stroke="#ddd" stroke-width="1.5"/>
+  <rect x="330" y="210" width="610" height="30" rx="8" fill="#e0f4f8" opacity="0.5"/>
+  <text x="345" y="235" class="section-title">Operations &amp; Workflows</text>
+
+  <!-- Erkundungen -->
+  <rect x="350" y="255" width="260" height="140" rx="8" fill="#f0fff4" stroke="#27ae60" stroke-width="1"/>
+  <text x="365" y="278" class="section-title" fill="#27ae60">Explorations</text>
+  <text x="365" y="300" class="code">erkundungen/</text>
+  <text x="365" y="320" class="body">Research &amp; Discovery</text>
+  <rect x="365" y="340" width="80" height="20" rx="4" fill="#27ae60"/>
+  <text x="369" y="354" class="badge">DOMAIN.md</text>
+
+  <!-- Tickets -->
+  <rect x="620" y="255" width="260" height="140" rx="8" fill="#fff8ee" stroke="#e07b00" stroke-width="1"/>
+  <text x="635" y="278" class="section-title" fill="#e07b00">Task Management</text>
+  <text x="635" y="300" class="code">tickets/</text>
+  <text x="635" y="320" class="body">Ticket Lifecycle</text>
+  <rect x="635" y="340" width="80" height="20" rx="4" fill="#e07b00"/>
+  <text x="639" y="354" class="badge">DOMAIN.md</text>
+
+  <!-- Legend / Axioms Info -->
+  <rect x="350" y="410" width="610" height="140" rx="8" fill="#e0f4f8" stroke="#007a99" stroke-dasharray="5,3" stroke-width="1"/>
+  <text x="365" y="435" class="section-title">Methodology Axioms (Highlights)</text>
+  <text x="365" y="460" class="body" fill="#005f73">• [CLAUDE-3] Lesen vor Schreiben</text>
+  <text x="365" y="480" class="body" fill="#005f73">• [CLAUDE-8] Vor dem Erfinden replizieren</text>
+  <text x="365" y="500" class="body" fill="#005f73">• [CLAUDE-9] Jede Domäne dokumentiert sich selbst (DOMAIN.md)</text>
+  <text x="365" y="520" class="body" fill="#005f73">• [CLAUDE-15] Diagramme immer als SVG</text>
+
+</svg>
