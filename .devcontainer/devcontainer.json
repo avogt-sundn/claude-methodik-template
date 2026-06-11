@@ -22,12 +22,10 @@
   "mounts": [
     // Named-Volume-Cache für Maven — überleben Container-Rebuilds
     "source=localcache,target=/home/vscode/.m2,type=volume",
-    // AWS CLI-Profil vom Host einbinden (optional — entfernen wenn kein AWS)
-    "source=${localEnv:HOME}/.aws,target=/home/vscode/.aws,type=bind,consistency=cached"
+    // Vertex Service Account vom Host einbinden (Variante B: localEnv)
+    "source=${localEnv:HOME}/.config/gcp/vertex-service-account.json,target=/home/vscode/.config/gcp/vertex-service-account.json,type=bind,readonly"
   ],
-  "postCreateCommand": ".devcontainer/scripts/postCreateCommand.sh",
-  // AWS SSO Login beim Start (optional — entfernen wenn kein AWS Bedrock)
-  "postStartCommand": "aws sts get-caller-identity --profile bedrock-dev >/dev/null 2>&1 || { aws configure list-profiles 2>/dev/null | grep -qx bedrock-dev && aws configure get sso_session --profile bedrock-dev >/dev/null 2>&1 && aws sso login --profile bedrock-dev || echo 'Skipping AWS SSO login: profile or sso_session not configured.'; }",
+"postCreateCommand": ".devcontainer/scripts/postCreateCommand.sh",
   "remoteEnv": {
     "DOCKER_NETWORK": "docker-default-network",
     // npm-Mirror (Verdaccio) — entfernen wenn kein lokaler npm-Mirror
@@ -35,11 +33,13 @@
     // Local LLM endpoints (optional)
     "LMSTUDIO": "http://192.168.64.1:1234",
     "MLX_SERVER": "http://192.168.64.1:1234",
-    // Claude via AWS Bedrock (optional — entfernen für Anthropic API direkt)
-    "CLAUDE_CODE_USE_BEDROCK": "1",
-    "AWS_PROFILE": "bedrock-dev",
-    "AWS_REGION": "eu-central-1",
-    "ANTHROPIC_MODEL": "eu.anthropic.claude-sonnet-4-6"
+    // Claude via Google Vertex AI
+    "CLAUDE_CODE_USE_VERTEX": "1",
+    "GOOGLE_APPLICATION_CREDENTIALS": "/home/vscode/.config/gcp/vertex-service-account.json",
+    "ANTHROPIC_VERTEX_PROJECT_ID": "${localEnv:GCP_PROJECT_ID:usergroups-490009}",
+    "CLOUD_ML_REGION": "${localEnv:GCP_REGION:europe-west1}",
+    "ANTHROPIC_VERTEX_REGION": "${localEnv:GCP_REGION:europe-west1}",
+    "ANTHROPIC_MODEL": "claude-sonnet-4-6"
   },
   "initializeCommand": "touch .env && mkdir -p ${localEnv:HOME}/.vscode && touch ${localEnv:HOME}/.vscode/.zsh_history && (docker network inspect docker-default-network >/dev/null 2>&1 || docker network create docker-default-network >/dev/null)",
   "runArgs": [

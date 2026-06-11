@@ -8,7 +8,7 @@ Definiert die **VS Code Dev Container**-Umgebung für dieses Projekt. Ein Entwic
 
 Besitzt alles unter `.devcontainer/`:
 - `devcontainer.json` — Container-Spec (Basis-Image, Features, Mounts, Ports, Umgebungsvariablen, VS Code-Erweiterungen)
-- `Dockerfile` — Basis-Image-Anpassung (System-Pakete, AWS CLI, Playwright OS-Abhängigkeiten)
+- `Dockerfile` — Basis-Image-Anpassung (System-Pakete, Playwright OS-Abhängigkeiten)
 - `scripts/postCreate*.sh` — einmalige Setup-Schritte nach Container-Erstellung
 
 Die Domäne hat **keine Laufzeit-Services** — sie ist reine Entwickler-Infrastruktur.
@@ -18,9 +18,9 @@ Die Domäne hat **keine Laufzeit-Services** — sie ist reine Entwickler-Infrast
 | Datei / Skript | Zweck |
 |---|---|
 | `devcontainer.json` | Einstiegspunkt — Features, Mounts, Ports, `initializeCommand`, `runArgs`, VS Code-Anpassungen |
-| `Dockerfile` | Erweitert `mcr.microsoft.com/devcontainers/java:dev-25-jdk-bookworm`; fügt System-Pakete, AWS CLI, Playwright OS-Bibliotheken hinzu |
+| `Dockerfile` | Erweitert `mcr.microsoft.com/devcontainers/java:dev-25-jdk-bookworm`; fügt System-Pakete und Playwright OS-Bibliotheken hinzu |
 | `scripts/postCreateCommand.sh` | Orchestrator — ruft alle `postCreate-*.sh` in Reihenfolge auf |
-| `scripts/postCreate-Claude.sh` | Richtet AWS-Verzeichnis-Berechtigungen ein |
+| `scripts/postCreate-Claude.sh` | Prüft Vertex-Credentials (`GOOGLE_APPLICATION_CREDENTIALS`) auf Existenz und Pflichtfelder |
 | `scripts/postCreate-Maven.sh` | Schreibt `~/.m2/settings.xml` mit lokalem Maven-Mirror (`maven-mirror:8080`) |
 | `scripts/postCreate-npm.sh` | Setzt npm-Auth-Token für Verdaccio (`${NPM_MIRROR}`) |
 | `scripts/postCreate-Playwright.sh` | Installiert Playwright-Testabhängigkeiten aus `tests/package.json` (optional) |
@@ -43,7 +43,8 @@ Folgende Stellen vor erstem Container-Build prüfen:
 | Projektname | `devcontainer.json` → `"name"` | `{{PROJECT_NAME}}` ersetzen |
 | Ports | `devcontainer.json` → `forwardPorts` | Nicht benötigte Ports entfernen |
 | VS Code-Erweiterungen | `devcontainer.json` → `extensions` | Nicht benötigte entfernen (Java, Angular, etc.) |
-| AWS-Variablen | `devcontainer.json` → `remoteEnv` | Entfernen wenn kein AWS Bedrock |
+| Vertex-Variablen | `devcontainer.json` → `remoteEnv` | `GCP_PROJECT_ID` und `GCP_REGION` auf dem Host setzen |
+| Vertex-Credentials | Hostpfad `~/.config/gcp/vertex-service-account.json` | Datei lokal anlegen; wird read-only in den Container gemountet |
 | Maven-Mirror | `scripts/postCreate-Maven.sh` | Entfernen wenn kein lokaler Mirror |
 | npm-Mirror | `scripts/postCreate-npm.sh` | Entfernen wenn kein lokaler npm-Mirror |
 | Java-Tools | `Dockerfile` → Spring Boot CLI, Quarkus CLI | Entfernen wenn nicht benötigt |
@@ -51,3 +52,4 @@ Folgende Stellen vor erstem Container-Build prüfen:
 ## Verlauf
 
 - 2026-06-03 — Erstfassung
+- 2026-06-11 — AWS-Bedrock-Default entfernt; Vertex-Setup mit localEnv-Credential-Mount dokumentiert
