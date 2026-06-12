@@ -12,11 +12,8 @@
     "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {},
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
     "ghcr.io/devcontainers-extra/features/ripgrep:1": {},
-    // Local features (default). After publishing devcontainer-features to GitHub, replace with:
-    // "ghcr.io/avogt-sundn/devcontainer-features/opencode:1": {}
-    // "ghcr.io/avogt-sundn/devcontainer-features/vertex-auth:1": {}
-    "./features/opencode": {},
-    "./features/vertex-auth": {}
+    "ghcr.io/avogt-sundn/devcontainer-features/opencode:1": {},
+    "ghcr.io/avogt-sundn/devcontainer-features/vertex-auth:1": {}
   },
   // Ports nach Bedarf anpassen oder entfernen
   "forwardPorts": [
