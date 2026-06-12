@@ -7,13 +7,15 @@
     "dockerfile": "Dockerfile"
   },
   "features": {
+    "ghcr.io/avogt-sundn/devcontainer-features/claude-code:1": {},
+    "ghcr.io/avogt-sundn/devcontainer-features/copilot-cli:1": {},
+    "ghcr.io/avogt-sundn/devcontainer-features/devtools:1": {},
+    "ghcr.io/avogt-sundn/devcontainer-features/opencode:1": {},
+    "ghcr.io/avogt-sundn/devcontainer-features/vertex-auth:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers-community/npm-features/prettier:1": {},
     "ghcr.io/devcontainers-extra/features/zsh-plugins:0": {},
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
-    "ghcr.io/devcontainers-extra/features/ripgrep:1": {},
-    "ghcr.io/avogt-sundn/devcontainer-features/opencode:1": {},
-    "ghcr.io/avogt-sundn/devcontainer-features/vertex-auth:1": {}
+    "ghcr.io/devcontainers-extra/features/ripgrep:1": {}
   },
   // Ports nach Bedarf anpassen oder entfernen
   "forwardPorts": [

@@ -1,22 +1,29 @@
 {
   "features": {
+    "ghcr.io/avogt-sundn/devcontainer-features/claude-code:1": {
+      "version": "1.0.2",
+      "resolved": "ghcr.io/avogt-sundn/devcontainer-features/claude-code@sha256:10e98a902b8053ab85f5e1f9cd4a3a305026e45b480368e06d33284754c49c0f",
+      "integrity": "sha256:10e98a902b8053ab85f5e1f9cd4a3a305026e45b480368e06d33284754c49c0f"
+    },
+    "ghcr.io/avogt-sundn/devcontainer-features/copilot-cli:1": {
+      "version": "1.0.1",
+      "resolved": "ghcr.io/avogt-sundn/devcontainer-features/copilot-cli@sha256:d488a1ac1748994fb917387bef2be58a8e5e8687e8bced2996ec181737e5381d",
+      "integrity": "sha256:d488a1ac1748994fb917387bef2be58a8e5e8687e8bced2996ec181737e5381d"
+    },
+    "ghcr.io/avogt-sundn/devcontainer-features/devtools:1": {
+      "version": "1.0.1",
+      "resolved": "ghcr.io/avogt-sundn/devcontainer-features/devtools@sha256:7450473405f44333289646e5d79b64c0398131b2253e1b53f835ac2ad4a4660f",
+      "integrity": "sha256:7450473405f44333289646e5d79b64c0398131b2253e1b53f835ac2ad4a4660f"
+    },
     "ghcr.io/avogt-sundn/devcontainer-features/opencode:1": {
-      "version": "1.0.0",
-      "resolved": "ghcr.io/avogt-sundn/devcontainer-features/opencode@sha256:3437922fdd43efdd9b7aacb767debfee3383b3c7e4e264faf228117454fbdbcd",
-      "integrity": "sha256:3437922fdd43efdd9b7aacb767debfee3383b3c7e4e264faf228117454fbdbcd"
+      "version": "1.0.1",
+      "resolved": "ghcr.io/avogt-sundn/devcontainer-features/opencode@sha256:8edc69b899a378a3f576448104a50cf00c291e7febaa8f6c659e16b47336a14b",
+      "integrity": "sha256:8edc69b899a378a3f576448104a50cf00c291e7febaa8f6c659e16b47336a14b"
     },
     "ghcr.io/avogt-sundn/devcontainer-features/vertex-auth:1": {
-      "version": "1.0.0",
-      "resolved": "ghcr.io/avogt-sundn/devcontainer-features/vertex-auth@sha256:1aa5c892afd0cdde8f38243c1b2c0ba8ed666c21fb4bf6cd4487f711a9a6b566",
-      "integrity": "sha256:1aa5c892afd0cdde8f38243c1b2c0ba8ed666c21fb4bf6cd4487f711a9a6b566"
-    },
-    "ghcr.io/devcontainers-community/npm-features/prettier:1": {
-      "version": "1.1.0",
-      "resolved": "ghcr.io/devcontainers-community/npm-features/prettier@sha256:41aca434d43373d78b276d3cd89ecdce960e0b618ff0ee59f2ecee0810dbabe9",
-      "integrity": "sha256:41aca434d43373d78b276d3cd89ecdce960e0b618ff0ee59f2ecee0810dbabe9",
-      "dependsOn": [
-        "ghcr.io/devcontainers/features/node"
-      ]
+      "version": "1.0.1",
+      "resolved": "ghcr.io/avogt-sundn/devcontainer-features/vertex-auth@sha256:ad01a45acc041dbd73ec42140fb68cbf8f33c26552c3bf3789d27aecd6f85c33",
+      "integrity": "sha256:ad01a45acc041dbd73ec42140fb68cbf8f33c26552c3bf3789d27aecd6f85c33"
     },
     "ghcr.io/devcontainers-extra/features/ripgrep:1": {
       "version": "1.0.15",
@@ -37,11 +44,6 @@
       "version": "1.1.0",
       "resolved": "ghcr.io/devcontainers/features/github-cli@sha256:d22f50b70ed75339b4eed1ba9ecde3a1791f90e88d37936517e3bace0bbad671",
       "integrity": "sha256:d22f50b70ed75339b4eed1ba9ecde3a1791f90e88d37936517e3bace0bbad671"
-    },
-    "ghcr.io/devcontainers/features/node": {
-      "version": "2.0.0",
-      "resolved": "ghcr.io/devcontainers/features/node@sha256:fedd4c11f7adfb64283b578dddc7da906728daa25fa293351c9d913231acf12f",
-      "integrity": "sha256:fedd4c11f7adfb64283b578dddc7da906728daa25fa293351c9d913231acf12f"
     }
   }
 }
