@@ -1,6 +1,0 @@
-{
-  "id": "vertex-auth",
-  "version": "1.0.0",
-  "name": "Vertex AI Auth",
-  "description": "Ensures the GCP config directory exists at build time; validates the service-account JSON at container start (postCreate.sh)."
-}
