@@ -8,3 +8,4 @@ settings/
 .secrets/
 *credentials.json
 *service-account*.json
+.devcontainer/devcontainer-lock.json
