@@ -69,3 +69,4 @@ Folgende Stellen vor erstem Container-Build prüfen:
 - 2026-06-03 — Erstfassung
 - 2026-06-11 — AWS-Bedrock-Default entfernt; Vertex-Setup mit localEnv-Credential-Mount dokumentiert
 - 2026-06-11 — postCreate-Skripte in lokale DevContainer-Features (`features/`) überführt; `postCreateCommand.sh` auf Auto-Discovery umgestellt
+- 2026-06-12 — Features auf Anforderungsanalyse-Profil ausgerichtet: `claude-code:1`, `copilot-cli:1`, `devtools:1` hinzugefügt; coding-spezifische Features (`node`, `playwright`, `prettier`, `springboot-cli`, `quarkus`) entfernt; Playwright-OS-Deps aus Dockerfile entfernt; Lock-Digests aktualisiert (`opencode`, `vertex-auth` → 1.0.1)

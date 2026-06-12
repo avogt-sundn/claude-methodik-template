@@ -44,26 +44,6 @@
             "async": true
           }
         ]
-      },
-      {
-        "matcher": "Read",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "input=$(cat); sid=$(echo \"$input\" | jq -r '.session_id // empty'); f=$(echo \"$input\" | jq -r '.tool_input.file_path // empty'); [ -n \"$f\" ] && [ -n \"$sid\" ] && echo \"$f\" >> \"/tmp/claude-reads-$sid\" || true",
-            "async": true
-          }
-        ]
-      },
-      {
-        "matcher": "Edit|Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "input=$(cat); sid=$(echo \"$input\" | jq -r '.session_id // empty'); f=$(echo \"$input\" | jq -r '.tool_input.file_path // empty'); [ -n \"$f\" ] && [ -n \"$sid\" ] && echo \"$f\" >> \"/tmp/claude-writes-$sid\" || true",
-            "async": true
-          }
-        ]
       }
     ],
     "PreToolUse": [
