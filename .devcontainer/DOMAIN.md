@@ -7,8 +7,7 @@ Definiert die **VS Code Dev Container**-Umgebung für dieses Projekt. Ein Entwic
 ## Bounded Context
 
 Besitzt alles unter `.devcontainer/`:
-- `devcontainer.json` — Container-Spec (GHCR-Features, Mounts, Ports, Umgebungsvariablen, VS Code-Erweiterungen)
-- `Dockerfile` — Basis-Image-Anpassung (System-Pakete, Diagnose-Tools)
+- `devcontainer.json` — Container-Spec (Basis-Image, GHCR-Features, Mounts, Ports, Umgebungsvariablen, VS Code-Erweiterungen)
 - `scripts/postCreateCommand.sh` — Auto-Discovery-Orchestrator für lokale Feature-postCreate-Skripte (läuft leer, wenn kein `features/`-Verzeichnis vorhanden)
 
 Die Domäne hat **keine Laufzeit-Services** — sie ist reine Entwickler-Infrastruktur.
@@ -17,8 +16,7 @@ Die Domäne hat **keine Laufzeit-Services** — sie ist reine Entwickler-Infrast
 
 | Datei / Skript | Zweck |
 |---|---|
-| `devcontainer.json` | Einstiegspunkt — Features, Mounts, Ports, `initializeCommand`, `runArgs`, VS Code-Anpassungen |
-| `Dockerfile` | Erweitert `mcr.microsoft.com/devcontainers/java:dev-25-jdk-bookworm`; fügt Diagnose-Tools und AWS CLI hinzu |
+| `devcontainer.json` | Einstiegspunkt — Basis-Image, Features, Mounts, Ports, `initializeCommand`, `runArgs`, VS Code-Anpassungen |
 | `scripts/postCreateCommand.sh` | Auto-Discovery-Orchestrator — führt `features/*/postCreate.sh` in lexikalischer Reihenfolge aus (fällt leer durch, wenn kein `features/`-Verzeichnis vorhanden) |
 
 ## GHCR-Features
@@ -44,6 +42,7 @@ Alle Features werden als publizierte Pakete von GHCR eingebunden — kein lokale
 - **Named Volumes für Caches** — `localcache` → `~/.m2` überlebt Container-Rebuilds.
 - **Kein stage-spezifischer Config** — `remoteEnv`-Variablen sind der einzige Konfigurationsweg (CLAUDE-2).
 - **Publizierte GHCR-Features statt lokaler `features/`** — `opencode`, `vertex-auth` und projektspezifische Tools werden als versionierte GHCR-Pakete unter `ghcr.io/avogt-sundn/devcontainer-features` veröffentlicht und eingebunden. Kein lokaler Build-Code im Repo.
+- **Kein Dockerfile** — alle System-Pakete werden durch das `devtools`-Feature abgedeckt; das Basis-Image wird direkt per `"image"` in `devcontainer.json` referenziert.
 
 ## Anpassungen beim Setup
 
@@ -58,7 +57,7 @@ Folgende Stellen vor erstem Container-Build prüfen:
 | Vertex-Variablen | `devcontainer.json` → `remoteEnv` | `GCP_PROJECT_ID` und `GCP_REGION` auf dem Host setzen |
 | Vertex-Credentials | Hostpfad `~/.config/gcp/vertex-service-account.json` | Datei lokal anlegen; wird read-only in den Container gemountet |
 | Maven-Mirror | `devcontainer.json` → `remoteEnv.NPM_MIRROR` | Entfernen wenn kein lokaler npm-Mirror |
-| Java-Tools | `Dockerfile` | Entfernen wenn nicht benötigt |
+| Basis-Image | `devcontainer.json` → `"image"` | Ggf. auf leichteres Image wechseln (z. B. `base:bookworm`) wenn kein Java benötigt |
 
 ## Verlauf
 
@@ -67,3 +66,4 @@ Folgende Stellen vor erstem Container-Build prüfen:
 - 2026-06-11 — postCreate-Skripte in lokale DevContainer-Features (`features/`) überführt; `postCreateCommand.sh` auf Auto-Discovery umgestellt
 - 2026-06-12 — Features auf Anforderungsanalyse-Profil ausgerichtet: `claude-code:1`, `copilot-cli:1`, `devtools:1` hinzugefügt; coding-spezifische Features entfernt; Playwright-OS-Deps aus Dockerfile entfernt
 - 2026-06-12 — Lokales `features/`-Verzeichnis entfernt; alle Features als publizierte GHCR-Pakete unter `ghcr.io/avogt-sundn/devcontainer-features` eingebunden; DOMAIN.md auf neue Struktur aktualisiert
+- 2026-06-12 — `Dockerfile` entfernt; System-Pakete durch `devtools`-Feature abgedeckt; Basis-Image direkt per `"image"` in `devcontainer.json` referenziert

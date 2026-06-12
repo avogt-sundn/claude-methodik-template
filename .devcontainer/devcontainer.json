@@ -3,9 +3,7 @@
 {
 "$schema": "./devcontainer.schema.json",
 "name": "KI",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  "image": "mcr.microsoft.com/devcontainers/java:dev-25-jdk-bookworm",
   "features": {
     "ghcr.io/avogt-sundn/devcontainer-features/claude-code:1": {},
     "ghcr.io/avogt-sundn/devcontainer-features/copilot-cli:1": {},
